@@ -13,7 +13,8 @@ RSpec.describe 'App Functional Test' do
       }
     end
     let(:people_controller) { PeopleController.new(params) }
-
+    let(:normalized_people) { people_controller.normalize }
+ 
     it 'parses input files and outputs normalized data' do
       normalized_people = people_controller.normalize
 
@@ -25,5 +26,10 @@ RSpec.describe 'App Functional Test' do
         'Rigoberto, NYC, 01/05/1962',
       ]
     end
+
+    it 'responds with expected size of normalized data' do
+      expect(normalized_people.count).to eq 4
+    end
+
   end
 end

@@ -1,18 +1,16 @@
 # frozen_string_literal: true
 
 class PeopleController
-  attr_reader :params
-
   def initialize(params)
     @params = params
   end
 
   def normalize
-    dollar_format = params[:dollar_format]
+    dollar_format = @params[:dollar_format]
     heading_dollar_format = file_heading(dollar_format)
     dollar_format_list = build_list(dollar_format, heading_dollar_format)
 
-    percent_format = params[:percent_format]
+    percent_format = @params[:percent_format]
     heading_percent_format = file_heading(percent_format)
     percent_format_list = build_list(percent_format, heading_percent_format)
 
