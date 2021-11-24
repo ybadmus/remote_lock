@@ -13,17 +13,23 @@ RSpec.describe 'App Functional Test' do
       }
     end
     let(:people_controller) { PeopleController.new(params) }
-
+    let(:normalized_people) { people_controller.normalize }
+ 
     it 'parses input files and outputs normalized data' do
       normalized_people = people_controller.normalize
 
-      # Expected format of each entry: `<first_name>, <city>, <birthdate M/D/YYYY>`
+      #Expected format of each entry: `<first_name>, <city>, <birthdate M/D/YYYY>`
       expect(normalized_people).to eq [
-        'Elliot, New York City, 5/4/1947',
-        'Mckayla, Atlanta, 5/29/1986',
-        'Rhiannon, Los Angeles, 4/30/1974',
-        'Rigoberto, New York City, 1/5/1962',
+        'Elliot, New York City, 05/04/1947',
+        'Mckayla, Atlanta, 05/29/1986',
+        'Rhiannon, LA, 04/30/1974',
+        'Rigoberto, NYC, 01/05/1962',
       ]
     end
+
+    it 'responds with expected size of normalized data' do
+      expect(normalized_people.count).to eq 4
+    end
+
   end
 end
